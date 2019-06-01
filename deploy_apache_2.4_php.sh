@@ -1,10 +1,8 @@
 #!/usr/bin/env bash
-# Create by Arun
-#
-
+# Create by Arun for Apache setup by compiling binaries
 # All PHP Releases -  https://php.net/releases/
-# All Apache dist - https://archive.apache.org/dist/
-# Apache - http://archive.apache.org/dist/httpd/
+# All Apache dist -   https://archive.apache.org/dist/
+# Apache -            http://archive.apache.org/dist/httpd/
 #########################################################################################################################
 
 # Deploying required Packages for Red Hat
@@ -13,14 +11,13 @@ yum install -y openssl-devel pcre-devel libxml2-devel libcurl-devel
 yum install -y openssl-devel expat-devel
 
 cd /rep/apache
-
-# Downloading Artefact 
+# Downloading Apache 
 wget http://archive.apache.org/dist/httpd/httpd-2.4.4.tar.gz
 tar -xvzf httpd-2.4.4.tar.gz
 
 # Moving to src directory
 cd httpd-2.4.4/srclib
-# Downloading apr and apr-util required package
+# Downloading apr and apr-util required package required for apache compilation
 wget https://archive.apache.org/dist/apr/apr-util-1.5.2.tar.gz
 wget https://archive.apache.org/dist/apr/apr-1.4.8.tar.gz
 tar -xvzf apr-1.4.8.tar.gz
@@ -30,7 +27,7 @@ mv apr-util-1.5.2 apr-util
 cd /rep/apache/httpd-2.4.4
 ./configure --prefix=/rep/apache/httpd/ --enable-so --enable-ssl --with-included-apr --enable-mods-shared=all
 make && make install
-/rep/apache/
+cd /rep/apache/
 wget https://www.php.net/distributions/php-7.1.30.tar.gz
 tar -xvzf php-7.1.30.tar.gz
 cd php-7.1.30
@@ -44,5 +41,5 @@ cd php-7.1.30
 wget https://www.php.net/distributions/php-5.6.40.tar.gz
 
 
-## Testing
-## Create a page inside htdocs of apache - <?php phpinfo();>
+## You can not use directoy php module with apache please read this article - https://www.php.net/manual/en/install.unix.apache2.php
+## For Testing Create a page inside htdocs of apache - <?php phpinfo(); ?>

@@ -9,6 +9,7 @@
 yum install -y gcc apr-devel apr-util-devel
 yum install -y openssl-devel pcre-devel libxml2-devel libcurl-devel
 yum install -y openssl-devel expat-devel
+yum install -y openldap openldap-devel openldap*i686 openldap-devel*i686
 
 cd /rep/apache
 # Downloading Apache 
@@ -39,6 +40,8 @@ cd php-7.1.30
 
 # Same thing can be done with php 5 as well
 wget https://www.php.net/distributions/php-5.6.40.tar.gz
+./configure --prefix=/rep/jenkin/apache/httpd/php --with-apxs2=/rep/jenkin/apache/httpd/bin/apxs --with-mysqli --with-curl --with-openssl --with-ldap --with-bz2 --enable-calender
+ make && make install
 
 
 ## You can not use directoy php module with apache please read this article - https://www.php.net/manual/en/install.unix.apache2.php

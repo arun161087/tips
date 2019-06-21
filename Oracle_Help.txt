@@ -1,0 +1,26 @@
+## Java Arguments for Weblogic 
+
+-Dweblogic.security.SSL.protocolVersion=TLSv1
+-Dweblogic.security.disableNullCipher=true
+-Dcom.sun.xml.internal.ws.transport.http.client.HttpTransportPipe.dump=true
+-Dweblogic.Stdout=/path/to/logs/<server_name>.out
+-Dweblogic.Stderr=/path/to/logs/<server_name>.err
+-Dweblogic.nodemanager.ServiceEnabled=true
+-Dweblogic.nmservice.RotationEnabled=true
+
+## How to export the private key of an Oracle Wallet
+
+openssl pkcs12 -in ewallet.p12 -passin pass: -out ewallet.txt -nodes
+
+
+## Oracle wallet creation by using user certificate & private key
+Create certificate bundle first -
+openssl pkcs7 -inform DER -outform PEM -in bundle.p7b -print_certs > certifcatebundle.pem
+
+Create wallet now
+openssl pkcs12 -export -in user.cer -inkey  private.pem -certfile certifcatebundle.pem -out ewallet.p12
+
+Covert it to auto-login
+<path_to_>/orapki wallet create -wallet PNN -auto_login
+
+

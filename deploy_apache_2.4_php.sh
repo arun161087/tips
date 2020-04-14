@@ -54,8 +54,11 @@ mkdir mysql-5.7-rpm-packages
 tar -xvf mysql-5.7.24-1.el7.x86_64.rpm-bundle.tar -C mysql-5.7-rpm-packages
 cd mysql-5.7-rpm-packages/
 # Don't use 'yum install *.rpm'. It will not work and give error messages
-yum install mysql-community-{server,client,common,libs}-* --exclude='*minimal*'
+yum install mysql-community-{server,client,common,libs}-* mysql-5.*­
+
 # Start MySQL
 systemctl start mysqld
 # Enable mysqld service in startup
 systemctl enable mysqld
+grep 'temporary password' /var/log/mysqld.log
+# ALTER USER 'root'@'localhost' IDENTIFIED BY 'MyNewPass4!';

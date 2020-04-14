@@ -46,3 +46,16 @@ wget https://www.php.net/distributions/php-5.6.40.tar.gz
 
 ## You can not use directoy php module with apache please read this article - https://www.php.net/manual/en/install.unix.apache2.php
 ## For Testing Create a page inside htdocs of apache - <?php phpinfo(); ?>
+
+## Insatalling mysql
+# Download MySQL 5.7 RPM tar
+wget https://dev.mysql.com/get/Downloads/MySQL-5.7/mysql-5.7.24-1.el7.x86_64.rpm-bundle.tar
+mkdir mysql-5.7-rpm-packages
+tar -xvf mysql-5.7.24-1.el7.x86_64.rpm-bundle.tar -C mysql-5.7-rpm-packages
+cd mysql-5.7-rpm-packages/
+# Don't use 'yum install *.rpm'. It will not work and give error messages
+yum install mysql-community-{server,client,common,libs}-* --exclude='*minimal*'
+# Start MySQL
+systemctl start mysqld
+# Enable mysqld service in startup
+systemctl enable mysqld
